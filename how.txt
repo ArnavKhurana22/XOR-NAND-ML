@@ -1,0 +1,58 @@
+1. Training the NAND Gate Perceptron
+The NAND gate perceptron is a simple model with one layer. Here’s the step-by-step training process:
+
+Step 1: Initialize Weights
+The perceptron is initialized with random weights (values close to zero) for each input and an additional weight for the bias.
+
+Step 2: Predicting and Activation
+Weighted Sum: Each input is multiplied by its corresponding weight, and the results are summed along with the bias.
+Activation: The sum is then passed through an activation function. Here, the perceptron uses a simple threshold function:
+If the sum is positive or zero, it outputs 1 (True).
+If it’s negative, it outputs 0 (False).
+Step 3: Training Loop
+For each training example (pair of inputs and the target output):
+
+Make a Prediction: The perceptron predicts an output for the current inputs.
+Calculate the Error: The error is simply the difference between the predicted output and the actual output.
+Adjust Weights:
+The perceptron adjusts each weight slightly in the direction that would reduce the error.
+The update rule is:
+new weight
+=
+old weight
++
+(
+learning rate
+)
+×
+error
+×
+input
+new weight=old weight+(learning rate)×error×input
+This adjustment continues over many epochs (repeats) until the perceptron consistently predicts the correct outputs.
+The code for this training process is handled in the train method of the Perceptron class. The learning rate controls how big each adjustment step is, and the model updates weights to minimize prediction errors gradually.
+
+2. Training the XOR Gate Multi-Layer Perceptron (MLP)
+The XOR gate problem requires a more complex neural network than the perceptron since XOR is not linearly separable. Here, we use a multi-layer perceptron (MLP), a neural network with one hidden layer.
+
+Step 1: Define Layers and Activation
+The MLP has:
+
+Input layer: Two neurons, corresponding to the two inputs.
+Hidden layer: Two neurons with a sigmoid activation function, which maps inputs to outputs smoothly (from 0 to 1).
+Output layer: One neuron with a sigmoid activation, producing an output in the range of 0 to 1.
+Step 2: Forward Propagation
+For each training input:
+
+Weighted Sum in Hidden Layer: Each input is multiplied by its corresponding weights and added up (just like the perceptron).
+Hidden Layer Activation: The weighted sum goes through the sigmoid activation function, generating intermediate values for each neuron in the hidden layer.
+Output Layer Calculation: These intermediate values are then passed to the output layer, where they’re combined and activated to produce the final output.
+Step 3: Calculate Loss and Backpropagate Errors
+Loss Calculation: The model’s error is calculated by comparing the predicted output with the true output using binary cross-entropy loss.
+Backpropagation:
+The error is then "backpropagated" through the network to adjust weights.
+The model calculates the gradient of the error concerning each weight and uses it to slightly adjust weights in the direction that reduces the error.
+Optimizers like Adam handle this automatically, making adjustments using these gradients.
+Step 4: Repeat Over Epochs
+The model goes through the entire dataset repeatedly (1,000 times in this case) to improve its weights, making it better at predicting the XOR gate’s output.
+
